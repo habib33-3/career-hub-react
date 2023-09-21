@@ -1,4 +1,19 @@
+import { useEffect, useState } from "react";
+import Job from "../Job/Job";
+
 const FeatureJobs = () => {
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("data/jobs.json");
+      const data = await response.json();
+      setJobs(data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div>
@@ -7,6 +22,14 @@ const FeatureJobs = () => {
           Explore thousands of job opportunities with all the information you
           need. Its your future
         </p>
+      </div>
+      <div>
+        {jobs.map((job) => (
+          <Job
+            job={job}
+            key={job.id}
+          />
+        ))}
       </div>
     </div>
   );
