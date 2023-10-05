@@ -9,6 +9,7 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import JobDetails from "./components/JobDetails/JobDetails";
 import AuthProvider from "./hooks/AuthProvider";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -34,9 +35,14 @@ const router = createBrowserRouter([
       },
 
       {
-        path:"/login",
-        element:<Login/>
-      }
+        path: "/login",
+        element: <Login />,
+      },
+
+      {
+        path: "/register",
+        element: <Register />,
+      },
     ],
   },
 ]);
