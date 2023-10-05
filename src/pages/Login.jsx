@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
 import "./Login.css";
 import { AuthContext } from "../hooks/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { googleSignIn, signIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -17,7 +19,11 @@ const Login = () => {
   const handleLogin = () => {
     if ((email, password)) {
       return signIn(email, password)
-        .then((res) => console.log(res.user))
+        .then((res) => {
+          console.log(res.user);
+          alert("login");
+          navigate("/");
+        })
         .catch((err) => setError(err.message));
     }
   };

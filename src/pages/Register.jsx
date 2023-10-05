@@ -1,24 +1,31 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../hooks/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { signUp } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  console.log(email, password);
 
   const handleRegister = () => {
-    if (
-      !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-        password
-      )
-    ) {
-      return setError("Password not strong");
-    }
+    // if (
+    //   !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+    //     password
+    //   )
+    // ) {
+    //   return setError("Password not strong");
+    // }
 
-    if (email) {
+    {
       signUp(email, password)
-        .then((res) => console.log(res.user))
+        .then((res) => {
+          console.log(res.user);
+          navigate("/");
+        })
         .catch((err) => console.log(err.message));
     }
   };
@@ -41,11 +48,15 @@ const Register = () => {
                 type="password"
                 placeholder="Type Password"
               />
-              <button className="Login-btn">Register</button>
+              <button
+                onClick={handleRegister}
+                className="Login-btn btn btn-primary"
+              >
+                Register
+              </button>
               <div className="login-btns">
-                <button onClick={handleRegister} className="google-btn ">Google Login</button>
+                <button className="google-btn ">Google Login</button>
               </div>
-              
             </div>
           </div>
         </div>

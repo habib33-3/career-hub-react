@@ -10,6 +10,7 @@ import JobDetails from "./components/JobDetails/JobDetails";
 import AuthProvider from "./hooks/AuthProvider";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PrivateRoute from "./hooks/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
 
       {
         path: "/job/:id",
-        element: <JobDetails />,
+        element: (
+          <PrivateRoute>
+            <JobDetails />
+          </PrivateRoute>
+        ),
         loader: () => fetch("../data/jobs.json"),
       },
 
